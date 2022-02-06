@@ -18,6 +18,17 @@ const Product = ({ title, basePrice, name,sizes, colors}) => {
     const clickedSize = sizes.find(element => element.name === currentSize)
     return basePrice + clickedSize.additionalPrice;
   }
+  
+
+  const hundleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Summary');
+    console.log('================');
+    console.log('Name:', title);
+    console.log('Price:', getPrice());
+    console.log('Size:', currentSize);
+    console.log('Color:', currentColor);
+  }
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -29,9 +40,10 @@ const Product = ({ title, basePrice, name,sizes, colors}) => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>{getPrice}$</span>
+          <span className={styles.price}>{getPrice()}$</span>
+          
         </header>
-        <form>
+        <form onSubmit={hundleSubmit}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
@@ -39,7 +51,7 @@ const Product = ({ title, basePrice, name,sizes, colors}) => {
               <li><button type="button">M</button></li>
               <li><button type="button">L</button></li>
               <li><button type="button">XL</button></li>*/}
-              {sizes.map(size =>
+              {sizes.map(size => 
                 <li key={shortid()}>
                   <button type="button" onClick={() => 
                     setCurrentSize(size.name)}
@@ -47,7 +59,7 @@ const Product = ({ title, basePrice, name,sizes, colors}) => {
                       {size.name}
                   </button>
                 </li>
-                )}
+              )}
               
             
             </ul>
@@ -58,7 +70,7 @@ const Product = ({ title, basePrice, name,sizes, colors}) => {
               {/* <li><button type="button" className={clsx(styles.colorBlack)} /></li>
               <li><button type="button" className={clsx(styles.colorRed)} /></li>
               <li><button type="button" className={clsx(styles.colorWhite, styles.active )} /></li>*/}
-              {colors.map(color =>
+              {colors.map(color => 
                 <li key={shortid()}>
                   <button type="button" onClick={() => 
                     setCurrentColor(color)} 
